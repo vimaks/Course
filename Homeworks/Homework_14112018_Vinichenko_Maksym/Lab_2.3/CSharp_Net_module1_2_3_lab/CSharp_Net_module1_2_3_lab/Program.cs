@@ -34,10 +34,14 @@ namespace CSharp_Net_module1_2_3_lab
 
             // compare 2nd object of Money and string
             // не понял задание
-            // check CurrencyType of every object
+            // check CurrencyType of every object            
             if (money1)
             {
-
+                // наиболее вероятное решение: в енумке нулевым элементом идет Unknown
+                // и тогда если валюта не Unknown тогда тру
+                // энумка на практике всегда дожна содеражть нулевым элемнтом какой нибудь Unknown или Unspecified или None
+                // потому что энумку можно парсить со строки
+                // и если не распарсили - 0, т.е. Unknown
             }
             if (money2)
             {

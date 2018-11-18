@@ -9,6 +9,7 @@ namespace CSharp_Net_module1_2_3_lab
     // 1) declare enumeration CurrencyTypes, values UAH, USD, EU
     public enum CurrencyTypes
     {
+        //Uknown,
         UAH,
         USD,
         EU
@@ -76,6 +77,7 @@ namespace CSharp_Net_module1_2_3_lab
         
         public static bool operator true(Money money1)
         {
+            
             Console.WriteLine(money1.Types);
             return true;
         }
@@ -95,11 +97,28 @@ namespace CSharp_Net_module1_2_3_lab
 
         public static explicit operator string(Money money)
         {
-            return money.Amount.ToString();
+            //ok, но я б еще код валюты учел
+            //return money.Amount.ToString();
+
+            //https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated
+            //такой формат создания строки  - знак доллара и фигурные скобки - интерполяция
+            return $"{money.Types.ToString()} {money.Amount}";
         }
 
 
-
-
+        public static implicit operator Money(string value)
+        {
+            //мы это не рассматривали, но в задании оно есть
+            // Enum.Parse - механизм приведения строки к енумке: в метод передали тип и строку, на выходе получили object который привели к нужному типу
+            //string.Split() - получения массива стрингов по разделителю (пробел, запятая и т.п.)
+            //value.Split()[0] вернет нам значение до пробела
+            //value.Split()[1] вернет нам значение после пробела
+            string strCur = value.Split()[0];
+            CurrencyTypes currency = (CurrencyTypes)Enum.Parse(typeof(CurrencyTypes), strCur);
+            string strAmount = value.Split()[1];
+            decimal amount = decimal.Parse(strAmount);
+            return new Money(amount, currency);
         }
+
+    }
 }
