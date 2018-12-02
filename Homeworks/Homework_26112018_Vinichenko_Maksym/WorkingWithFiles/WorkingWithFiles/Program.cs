@@ -35,8 +35,8 @@ namespace WorkingWithFiles
             }
 
             using (StreamReader sr = new StreamReader(path + "text1.txt"))
-            {                
-                string text = sr.ReadToEnd();                
+            {
+                tempText = sr.ReadToEnd();                
                 //tempText = tempText.Replace("\0", String.Empty);
             }
 
