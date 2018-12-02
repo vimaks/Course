@@ -12,7 +12,7 @@ namespace LinqTask
         {
             Person[] people = Dataset.People;
             // 1) Получить число мужчин в коллекции; число женщин
-            int manCount = people.Where(p => p.Gender == Gender.Man).ToArray().Length;
+            int manCount = people.Where(p => p.Gender == Gender.Man).ToArray().Length;   //.Count() вместо .ToArray().Length - избавит от необходимости приводить к массиву
             int womanCount = people.Where(p => p.Gender == Gender.Woman).ToArray().Length;
 
             // 2) Отсортировать персонажей по фамилии потом по имени, выбрать их описание в формате $"{Name} {SurName}, age
@@ -57,7 +57,7 @@ namespace LinqTask
             var noEnCountry = enSpeakAll.Where(p => p.HomeAddress.City.Country.Language != Dataset.Langs["en"]).ToArray();
             double result = (double)noEnCountry.Count() / (double)enSpeakAll.Count() * (double)100;
             // 18) Найти самого богатого персонажа
-            Person maxIncomePerson = people.FirstOrDefault(p => p.AnnualIncome == people.Max(pe => pe.AnnualIncome));
+            Person maxIncomePerson = people.FirstOrDefault(p => p.AnnualIncome == people.Max(pe => pe.AnnualIncome));  //Скорее First  - кто то да будет всегда самым богатым
             // 19) Найти персонажа с наименьшим доходом в Британии
             Person minIncomePersonBritan = people.Where(p => p.HomeAddress.City.Country.Id == 1).FirstOrDefault(p => p.AnnualIncome == people.Where(pe => pe.HomeAddress.City.Country.Id == 1).Min(pe => pe.AnnualIncome));
             // 20) Отсортировать персонажей по доходу по нисходящей, потом по имени и по фамилии по восходящей
